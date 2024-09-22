@@ -15,11 +15,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [BackController::class, 'verHome'])->name('front.show');
+Route::get('/', function () {
+    return redirect()->route('front.show'); // Redirige a /panel
+});
 
-Route::get('/dashboard', function () {
+Route::get('/panel', [BackController::class, 'verHome'])
+    ->middleware('auth') // Protege la ruta con el middleware de autenticación si lo necesitas
+    ->name('front.show');
+    
+/*Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');*/
 
 /*PERSONAL================================================*/
 Route::get('/panel/personal', [BackController::class, 'verPersonal'])->name('personal.show');

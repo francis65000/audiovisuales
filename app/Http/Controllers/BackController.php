@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Personal;
 use App\Models\Roles;
+use App\Models\Tarea;
+use App\Models\Tareas;
 use Illuminate\Http\Request;
 
 class BackController extends Controller
@@ -11,16 +13,10 @@ class BackController extends Controller
     //INICIO BACK
     public function verHome(Request $request)
     {
-        //PARTE PARA LAS ESTADISTICAS
-
-
         //PASAMOS LOS DATOS A LA VISTA
+        $tareasPanificadas = Tareas::where('id', 1)->get();
 
-
-        //PASAR ELEMENTOS PARA EL SLIDER
-
-
-        return view('backend.home');
+        return view('backend.home', compact('tareasPanificadas'));
     }
 
     public function verPersonal(Request $request)
@@ -30,21 +26,27 @@ class BackController extends Controller
         $personal = Personal::whereIn('id', [1, 3])->get();
         $roles = Roles::all();
 
-        // PASAR ELEMENTOS PARA EL SLIDER
         return view('backend.personal', compact('personal', 'roles'));
     }
 
     public function verCuadroTareas(Request $request)
     {
-        //PARTE PARA LAS ESTADISTICAS
+        // Obtener las últimas tareas con estado 1, ordenadas por fecha
+        $tareasPanificadas = Tareas::where('estado', 1)
+            ->orderBy('fecha', 'desc') // Ordena por fecha de manera descendente
+            ->get();
+
+        // Obtener las últimas tareas con estado 2
+        $tareasEnProceso = Tareas::where('estado', 2)
+            ->orderBy('fecha', 'desc')
+            ->get();
+
+        // Obtener las últimas tareas con estado 3
+        $tareasTerminadas = Tareas::where('estado', 3)
+            ->orderBy('fecha', 'desc')
+            ->get();
 
 
-        //PASAMOS LOS DATOS A LA VISTA
-
-
-        //PASAR ELEMENTOS PARA EL SLIDER
-
-
-        return view('backend.cuadrantetareas');
+        return view('backend.cuadrantetareas', compact('tareasPanificadas', 'tareasEnProceso', 'tareasTerminadas'));
     }
 }

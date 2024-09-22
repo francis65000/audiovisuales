@@ -16,8 +16,22 @@
             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <li class="dropdown-item">¡Hola! <br> {{ Auth::user()->name }}</li>
+                <li>
+                    <a class="dropdown-item" href="#">
+                        Mi cuenta
+                    </a>
+                </li>
                 <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item" href="#!"><i class="fas fa-solid fa-right-from-bracket"></i> Cerrar Sesión </a></li>
+                <li>
+                    <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="fas fa-solid fa-right-from-bracket"></i> Cerrar Sesión
+                    </a>
+                
+                    <!-- Formulario oculto para cerrar sesión -->
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </li>
             </ul>
         </li>
     </ul>
