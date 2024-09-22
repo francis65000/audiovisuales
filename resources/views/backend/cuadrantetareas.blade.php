@@ -32,7 +32,9 @@
                 <li class="breadcrumb-item active">Departamento de Audiovisuales</li>
             </ol>
             <!--LEYENDA DE COLORES-->
+            <h3 class="mt-4 text-right">Leyenda de Colores</h3>
             <div class="row text-center">
+
                 <div class="col-xl-2 col-md-4">
                     <div class="card bg-info text-white mb-4">
                         <div class="card-body text-dark fw-bold">PLANIFICACIÓN</div>
@@ -60,7 +62,8 @@
                 </div>
             </div>
             <!--AQUI EMPIEZAN LAS TABLAS-->
-            <a href="#" class="btn btn-primary mb-2"><i class="fas fa-solid fa-plus"></i> Nueva tarea</a>
+            <a href="{{ url('/panel/tareas/crear') }}" class="btn btn-primary mb-2"><i class="fas fa-solid fa-plus"></i>
+                Nueva tarea</a>
 
             <!--PLANIFICADAS//////////////////////////////////////////////////////////////////////////////////////////////////////-->
             <div class="card mb-4">
@@ -78,21 +81,31 @@
                                     <div class="card text-white mb-4 {{ $tarea->categoria }}">
                                         <div class="card-body text-dark">
                                             <h5 class="text-uppercase">{{ $tarea->titulo }}</h5>
-                                            <p>Apertura: {{ \Carbon\Carbon::parse($tarea->fecha)->format('d-m-Y') }}</p>
+                                            <p>Apertura: {{ \Carbon\Carbon::parse($tarea->created_at)->format('d-m-Y') }}</p>
                                             <p>{{ $tarea->descripcion }}</p>
-                                            <p><i>Creada por: {{ $tarea->creado_por }}</i>
+                                            <p><i>Creador: {{ $tarea->creado_por }}</i>
                                                 <br>
-                                                <i>Actualizada por: {{ $tarea->actualizado_por }}</i>
+                                                <i>Actualizado: {{ $tarea->actualizado_por }}</i>
                                             </p>
-                                            <a href="#" class="btn btn-success mb-2"><i
-                                                    class="fas fa-solid fa-arrows-spin"></i>
-                                                En proceso</a>
+                                            <form action="{{ route('tasks.updateEstado', $tarea->id) }}" method="POST" style="display: inline;">
+                                                @csrf
+                                                @method('PATCH')
+                                                <button type="submit" class="btn btn-success mb-2" onclick="return confirm('¿Estás seguro de que deseas cambiar el estado a En proceso?');">
+                                                    <i class="fas fa-solid fa-arrows-spin"></i> En proceso
+                                                </button>
+                                            </form>
                                             <a href="#" class="btn btn-warning mb-2"><i
                                                     class="fas fa-solid fa-pen-to-square"></i>
                                                 Modificar</a>
-                                            <a href="#" class="btn btn-danger mb-2"><i
-                                                    class="fas fa-solid fa-trash"></i>
-                                                Eliminar</a>
+                                            <form action="{{ route('tasks.destroy', $tarea->id) }}" method="POST"
+                                                style="display: inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger mb-2"
+                                                    onclick="return confirm('¿Estás seguro de que deseas eliminar esta tarea?');">
+                                                    <i class="fas fa-solid fa-trash"></i> Eliminar
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -117,21 +130,31 @@
                                     <div class="card text-white mb-4 {{ $tarea->categoria }}">
                                         <div class="card-body text-dark">
                                             <h5 class="text-uppercase">{{ $tarea->titulo }}</h5>
-                                            <p>Apertura: {{ \Carbon\Carbon::parse($tarea->fecha)->format('d-m-Y') }}</p>
+                                            <p>Apertura: {{ \Carbon\Carbon::parse($tarea->created_at)->format('d-m-Y') }}</p>
                                             <p>{{ $tarea->descripcion }}</p>
-                                            <p><i>Creada por: {{ $tarea->creado_por }}</i>
+                                            <p><i>Creador: {{ $tarea->creado_por }}</i>
                                                 <br>
-                                                <i>Actualizada por: {{ $tarea->actualizado_por }}</i>
+                                                <i>Actualizado: {{ $tarea->actualizado_por }}</i>
                                             </p>
-                                            <a href="#" class="btn btn-success mb-2"><i
-                                                    class="fas fa-solid fa-arrows-spin"></i>
-                                                Terminada</a>
+                                            <form action="{{ route('tasks.cerrarTarea', $tarea->id) }}" method="POST" style="display: inline;">
+                                                @csrf
+                                                @method('PATCH')
+                                                <button type="submit" class="btn btn-success mb-2" onclick="return confirm('¿Estás seguro de que deseas cambiar el estado a Terminada?');">
+                                                    <i class="fas fa-solid fa-arrows-spin"></i> Terminada
+                                                </button>
+                                            </form>
                                             <a href="#" class="btn btn-warning mb-2"><i
                                                     class="fas fa-solid fa-pen-to-square"></i>
                                                 Modificar</a>
-                                            <a href="#" class="btn btn-danger mb-2"><i
-                                                    class="fas fa-solid fa-trash"></i>
-                                                Eliminar</a>
+                                            <form action="{{ route('tasks.destroy', $tarea->id) }}" method="POST"
+                                                style="display: inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger mb-2"
+                                                    onclick="return confirm('¿Estás seguro de que deseas eliminar esta tarea?');">
+                                                    <i class="fas fa-solid fa-trash"></i> Eliminar
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -156,15 +179,21 @@
                                     <div class="card text-white mb-4 {{ $tarea->categoria }}">
                                         <div class="card-body text-dark">
                                             <h5 class="text-uppercase">{{ $tarea->titulo }}</h5>
-                                            <p>Apertura: {{ \Carbon\Carbon::parse($tarea->fecha)->format('d-m-Y') }}</p>
+                                            <p>Apertura: {{ \Carbon\Carbon::parse($tarea->created_at)->format('d-m-Y') }}</p>
                                             <p>{{ $tarea->descripcion }}</p>
-                                            <p><i>Creada por: {{ $tarea->creado_por }}</i>
+                                            <p><i>Creador: {{ $tarea->creado_por }}</i>
                                                 <br>
-                                                <i>Actualizada por: {{ $tarea->actualizado_por }}</i>
+                                                <i>Actualizado: {{ $tarea->actualizado_por }}</i>
                                             </p>
-                                            <a href="#" class="btn btn-danger mb-2"><i
-                                                    class="fas fa-solid fa-trash"></i>
-                                                Eliminar</a>
+                                            <form action="{{ route('tasks.destroy', $tarea->id) }}" method="POST"
+                                                style="display: inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger mb-2"
+                                                    onclick="return confirm('¿Estás seguro de que deseas eliminar esta tarea?');">
+                                                    <i class="fas fa-solid fa-trash"></i> Eliminar
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -173,8 +202,10 @@
                     @endif
                 </div>
             </div>
-
-            <a href="#" class="btn btn-danger mb-2"><i class="fas fa-solid fa-x"></i> Vaciar tabla</a>
+            <h5>Vaciar Cuadrante de tareas</h5>
+            <h5 class="btn btn-danger fw-bold">¡IMPORTANTE!</h5>
+            <p>Vaciar el cuadrante de tareas es un proceso que no se puede deshacer, se eliminarán todas las tareas del cuadrante.</p>
+            <a href="#" class="btn btn-danger mb-2" onclick="return confirm('¿Estás seguro de que deseas vaciar todo el cuadrante?');"><i class="fas fa-solid fa-trash"></i> Eliminar todo</a>
         </div>
     </main>
 

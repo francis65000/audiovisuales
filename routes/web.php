@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BackController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TareasController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +23,7 @@ Route::get('/', function () {
 Route::get('/panel', [BackController::class, 'verHome'])
     ->middleware('auth') // Protege la ruta con el middleware de autenticación si lo necesitas
     ->name('front.show');
-    
+
 /*Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');*/
@@ -33,6 +34,15 @@ Route::get('/panel/personal', [BackController::class, 'verPersonal'])->name('per
 
 /*CUADRANTE TAREAS================================================*/
 Route::get('/panel/cuadrante-tareas', [BackController::class, 'verCuadroTareas'])->name('cuadrante.show');
+Route::get('/panel/tareas/crear', [TareasController::class, 'crearTarea'])->name('tareas.crear');
+Route::post('/panel/tareas/tasks', [TareasController::class, 'store'])->name('tasks.store');
+Route::delete('/panel/tareas/tasks/{id}', [TareasController::class, 'destroy'])->name('tasks.destroy');
+//CAMBIAR A EN PROCESO
+Route::patch('/panel/tareas/tasks/{id}/estado', [TareasController::class, 'updateEstado'])->name('tasks.updateEstado');
+//CERRAR TAREA
+Route::patch('/panel/tareas/tasks/{id}/cerrar', [TareasController::class, 'cerrarTarea'])->name('tasks.cerrarTarea');
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
