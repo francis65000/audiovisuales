@@ -4,6 +4,27 @@
 
 @section('content')
 
+    <style>
+        .bg-orange {
+            background-color: orange;
+            /* O el código hexadecimal que prefieras, por ejemplo: #ff9800 */
+        }
+
+        .bg-yellow {
+            background-color: yellow;
+            /* O el código hexadecimal que prefieras, por ejemplo: #ff9800 */
+        }
+
+        .bg-green {
+            background-color: #92D050;
+            /* O el código hexadecimal que prefieras, por ejemplo: #ff9800 */
+        }
+
+        .bg-pink {
+            background-color: #E8588F;
+            /* O el código hexadecimal que prefieras, por ejemplo: #ff9800 */
+        }
+    </style>
     <main>
         <div class="container-fluid px-4">
             <h1 class="mt-4">Inicio</h1>
@@ -55,7 +76,30 @@
                             <i class="fas fa-solid fa-list-check"></i>
                             Tareas pendientes
                         </div>
-                        <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                        <div class="card-body">
+                            @if ($tareasPendientes->isEmpty())
+                                <p>No hay tareas disponibles.</p>
+                            @else
+                                <div class="row">
+                                    @foreach ($tareasPendientes as $tarea)
+                                        <div class="col-xl-4 col-md-6">
+                                            <div class="card text-white mb-4 {{ $tarea->categoria }}">
+                                                <div class="card-body text-dark">
+                                                    <h5 class="text-uppercase">{{ $tarea->titulo }}</h5>
+                                                    <p>Apertura:
+                                                        {{ \Carbon\Carbon::parse($tarea->created_at)->format('d-m-Y') }}</p>
+                                                    <p>{{ $tarea->descripcion }}</p>
+                                                    <p><i>Creador: {{ $tarea->creado_por }}</i>
+                                                        <br>
+                                                        <i>Actualizado: {{ $tarea->actualizado_por }}</i>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endif
+                        </div>
                     </div>
                 </div>
                 <!--ACCESO DIRECTO A MEDIOS-->

@@ -14,9 +14,12 @@ class BackController extends Controller
     public function verHome(Request $request)
     {
         //PASAMOS LOS DATOS A LA VISTA
-        $tareasPanificadas = Tareas::where('id', 1)->get();
+        $tareasPendientes = Tareas::where('estado', 1) // Cambia '1' por el valor correspondiente a "pendiente"
+        ->orderBy('created_at', 'desc') // Ordenar por fecha de creación de forma descendente
+        ->take(3) // Obtener solo las 3 últimas
+        ->get();
 
-        return view('backend.home', compact('tareasPanificadas'));
+        return view('backend.home', compact('tareasPendientes'));
     }
 
     public function verPersonal(Request $request)
