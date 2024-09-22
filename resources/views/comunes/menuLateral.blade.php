@@ -24,7 +24,7 @@
                 </div>
                 <!--GRUPO 3-->
                 <div class="sb-sidenav-menu-heading">TAREAS</div>
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="{{url("/panel/cuadrante-tareas")}}">
                     <div class="sb-nav-link-icon"><i class="fas fa-solid fa-list-check"></i></div>
                     Cuadrante de tareas
                 </a>
@@ -38,7 +38,7 @@
         </div>
         <div class="sb-sidenav-footer">
             <div class="small">Sesión iniciada como:</div>
-            Usuario
+            {{ Auth::user()->name }}
         </div>
     </nav>
 </div>

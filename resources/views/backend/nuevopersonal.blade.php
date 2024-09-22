@@ -1,6 +1,6 @@
 @extends('comunes.masterBackend')
 
-@section('title', 'Personal - Audiovisuales IES Jándula')
+@section('title', 'Nuevo Personal - Audiovisuales IES Jándula')
 
 @section('content')
 

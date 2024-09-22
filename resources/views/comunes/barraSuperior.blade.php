@@ -15,9 +15,9 @@
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li class="dropdown-item">Usuario</li>
+                <li class="dropdown-item">¡Hola! <br> {{ Auth::user()->name }}</li>
                 <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item" href="#!">Cerrar Sesión</a></li>
+                <li><a class="dropdown-item" href="#!"><i class="fas fa-solid fa-right-from-bracket"></i> Cerrar Sesión </a></li>
             </ul>
         </li>
     </ul>

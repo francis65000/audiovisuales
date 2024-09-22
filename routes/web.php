@@ -24,6 +24,10 @@ Route::get('/dashboard', function () {
 /*PERSONAL================================================*/
 Route::get('/panel/personal', [BackController::class, 'verPersonal'])->name('personal.show');
 
+
+/*CUADRANTE TAREAS================================================*/
+Route::get('/panel/cuadrante-tareas', [BackController::class, 'verCuadroTareas'])->name('cuadrante.show');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

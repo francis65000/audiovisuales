@@ -25,16 +25,26 @@ class BackController extends Controller
 
     public function verPersonal(Request $request)
     {
-        // Suponiendo que el ID del rol 'lector' es 1, ajústalo según tu base de datos
-        $lectorRolId = 1; // Cambia este valor al ID correcto del rol 'lector'
 
         // Filtramos los usuarios cuyo rol no sea 'lector' y cuyo ID no sea 5
-        $personal = Personal::where('rol_id', '!=', $lectorRolId)
-            ->where('id', '!=', 5)
-            ->get();
+        $personal = Personal::whereIn('id', [1, 3])->get();
         $roles = Roles::all();
 
         // PASAR ELEMENTOS PARA EL SLIDER
         return view('backend.personal', compact('personal', 'roles'));
+    }
+
+    public function verCuadroTareas(Request $request)
+    {
+        //PARTE PARA LAS ESTADISTICAS
+
+
+        //PASAMOS LOS DATOS A LA VISTA
+
+
+        //PASAR ELEMENTOS PARA EL SLIDER
+
+
+        return view('backend.cuadrantetareas');
     }
 }
