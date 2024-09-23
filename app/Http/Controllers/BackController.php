@@ -15,11 +15,14 @@ class BackController extends Controller
     {
         //PASAMOS LOS DATOS A LA VISTA
         $tareasPendientes = Tareas::where('estado', 1) // Cambia '1' por el valor correspondiente a "pendiente"
-        ->orderBy('created_at', 'desc') // Ordenar por fecha de creación de forma descendente
-        ->take(3) // Obtener solo las 3 últimas
-        ->get();
+            ->orderBy('created_at', 'desc') // Ordenar por fecha de creación de forma descendente
+            ->take(3) // Obtener solo las 3 últimas
+            ->get();
 
-        return view('backend.home', compact('tareasPendientes'));
+        $conteoTareasPendientes = Tareas::where('estado', 1) // Cambia '1' por el valor correspondiente a "pendiente"
+            ->count();
+
+        return view('backend.home', compact('tareasPendientes', 'conteoTareasPendientes'));
     }
 
     public function verPersonal(Request $request)

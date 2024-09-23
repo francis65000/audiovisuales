@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id(); // Crea un campo ID autoincrementable
             $table->string('nombre'); // Campo para el nombre
             $table->string('apellido'); // Campo para el apellido
+            $table->string('aula'); // Campo para el apellido
             $table->foreignId('rol_id') // Campo para la relación con roles
                 ->constrained('roles') // Especifica la tabla de referencia
                 ->onDelete('cascade'); // Opcional: elimina el personal si se elimina el rol
