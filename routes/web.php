@@ -45,6 +45,8 @@ Route::patch('/panel/tareas/tasks/{id}/cerrar', [TareasController::class, 'cerra
 
 /*DRIVE=============================================================*/
 Route::get('/panel/medios-drive', [BackController::class, 'verDrive'])->name('drive.show');
+Route::get('/panel/medios-drive/crear', [MedioController::class, 'crearMedio'])->name('medios.crear');
+Route::post('/panel/medios-drive', [MedioController::class, 'store'])->name('medios.store');
 Route::delete('/panel/medios-drive/{id}', [MedioController::class, 'destroy'])->name('medios.destroy');
 
 

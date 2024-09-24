@@ -54,7 +54,8 @@
                     <div class="card bg-success text-white mb-4">
                         <div class="card-body">Panel de Tareas</div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" href="{{ url('/panel/cuadrante-tareas')}}">Ver más</a>
+                            <a class="small text-white stretched-link" href="{{ url('/panel/cuadrante-tareas') }}">Ver
+                                más</a>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
@@ -101,9 +102,10 @@
                             @endif
                         </div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            Tareas pendientes: {{$conteoTareasPendientes}}
-                            <a class="btn btn-primary stretched-link" href="{{ url('/panel/cuadrante-tareas')}}">Panel de tareas <i class="fas fa-angle-right"></i></a>
-                            
+                            Tareas pendientes: {{ $conteoTareasPendientes }}
+                            <a class="btn btn-primary stretched-link" href="{{ url('/panel/cuadrante-tareas') }}">Panel de
+                                tareas <i class="fas fa-angle-right"></i></a>
+
                         </div>
                     </div>
                 </div>
@@ -115,27 +117,15 @@
                             Accesos directos medios
                         </div>
                         <div class="card-body">
-                            <div class="card bg-success text-white mb-2">
-                                <div class="card-body d-flex align-items-center justify-content-between">
-                                    <a class="text-white stretched-link text-decoration-none" href="#"><i
-                                            class="FAS fa-solid fa-folder"></i> CURSO 2024 - 2025</a>
-                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            @foreach ($mediosDrive as $medio)
+                                <div class="card bg-success text-white mb-2">
+                                    <div class="card-body d-flex align-items-center justify-content-between">
+                                        <a class="text-white stretched-link text-decoration-none" href="{{$medio->url}}" target="_blank"><i
+                                                class="FAS fa-solid fa-folder"></i> CURSO {{$medio->anio}}</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="card bg-success text-white mb-2">
-                                <div class="card-body d-flex align-items-center justify-content-between">
-                                    <a class="text-white stretched-link text-decoration-none" href="#"><i
-                                            class="FAS fa-solid fa-folder"></i> CURSO 2023 - 2024</a>
-                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                </div>
-                            </div>
-                            <div class="card bg-success text-white mb-2">
-                                <div class="card-body d-flex align-items-center justify-content-between">
-                                    <a class="text-white stretched-link text-decoration-none" href="#"><i
-                                            class="FAS fa-solid fa-folder"></i> CURSO 2022 - 2023</a>
-                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

@@ -13,7 +13,7 @@ class Personal extends Model
     protected $table = 'personal';
 
     // Especifica los campos que se pueden llenar masivamente
-    protected $fillable = ['nombre', 'apellido', 'rol_id'];
+    protected $fillable = ['nombre', 'apellido', 'rol_id', 'aula'];
 
     /**
      * Relación con el modelo Rol.

@@ -22,7 +22,9 @@ class BackController extends Controller
         $conteoTareasPendientes = Tareas::where('estado', 1) // Cambia '1' por el valor correspondiente a "pendiente"
             ->count();
 
-        return view('backend.home', compact('tareasPendientes', 'conteoTareasPendientes'));
+            $mediosDrive = Medio::orderBy('created_at', 'desc')->take(4)->get();
+
+        return view('backend.home', compact('tareasPendientes', 'conteoTareasPendientes', 'mediosDrive'));
     }
 
     public function verPersonal(Request $request)

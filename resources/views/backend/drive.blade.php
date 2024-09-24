@@ -16,7 +16,8 @@
                     Archivo fotográfico por cursos
                 </div>
                 <div class="card-body">
-                    <a href="#" class="btn btn-primary mb-2"><i class="fas fa-solid fa-plus"></i> Nuevo</a>
+                    <a href="{{ url('/panel/medios-drive/crear') }}" class="btn btn-primary mb-2"><i
+                            class="fas fa-solid fa-plus"></i> Nuevo</a>
                     @if ($mediosDrive->isEmpty())
                         <p>No hay medios disponibles.</p>
                     @else
@@ -25,10 +26,11 @@
                                 <div class="col-xl-3 col-md-6">
                                     <div class="card bg-success text-white mb-2">
                                         <div class="card-body d-flex align-items-center justify-content-between">
-                                            <a class="text-white stretched-link text-decoration-none fs-4"
-                                                href="{{ $medio->url }}" target="_blank">
-                                                <i class="fas fa-solid fa-folder fs-1"></i> 
-                                            <br> CURSO {{ $medio->anio }}</a>
+                                            <a class="text-white  text-decoration-none fs-4" href="{{ $medio->url }}"
+                                                target="_blank">
+                                                <i class="fas fa-solid fa-folder fa-3x mb-2"></i>
+                                                <br> CURSO {{ $medio->anio }}
+                                            </a>
                                             <!--boton de eliminar-->
                                         </div>
                                         <div class="card-footer d-flex align-items-center justify-content-between">
@@ -40,7 +42,12 @@
                                                     <i class="fas fa-solid fa-trash"></i> Eliminar
                                                 </button>
                                             </form>
-                                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                            <div class="small text-white">
+                                                <a class="text-white  text-decoration-none"
+                                                    href="{{ $medio->url }}" target="_blank">
+                                                    <i class="fas fa-solid fa-arrow-up-right-from-square"></i>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

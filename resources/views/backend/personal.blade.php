@@ -17,51 +17,41 @@
                 </div>
                 <div class="card-body">
                     <a href="#" class="btn btn-primary mb-2"><i class="fas fa-solid fa-plus"></i> Nuevo</a>
-                    <table id="datatablesSimple">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre</th>
-                                <th>Apellidos</th>
-                                <th>Rol</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre</th>
-                                <th>Apellidos</th>
-                                <th>Rol</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </tfoot>
-                        <tbody>
-                            @foreach ($personal as $employee)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $employee->nombre }}</td>
-                                    <td>{{ $employee->apellido }}</td>
-                                    <td>{{ $employee->rol ? ucfirst($employee->rol->rol) : 'Sin rol asignado' }}</td>
-                                    <!-- ACCIONES -->
-                                    <td>
-                                        <a href="{{ url('/empleado/' . $employee->id . '/ver') }}" class="btn btn-primary">
-                                            <i class="fas fa-solid fa-pen-to-square"></i> Ver ficha
-                                        </a>
-                                        <a href="{{ url('/empleado/' . $employee->id . '/editar') }}"
-                                            class="btn btn-warning">
-                                            <i class="fas fa-solid fa-pen-to-square"></i> Modificar
-                                        </a>
-                                        <a href="{{ url('/empleado/' . $employee->id . '/eliminar') }}"
-                                            class="btn btn-danger"
-                                            onclick="return confirm('¿Estás seguro de eliminar este empleado?')">
-                                            <i class="fas fa-solid fa-x"></i> Eliminar
-                                        </a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    <div class="row">
+                        @foreach ($personal as $employee)
+                            <div class="col-6 mb-4"> <!-- Mantener en 2 columnas -->
+                                <div class="card bg-info">
+                                    <div class="card-body">
+                                        <!-- Información del empleado -->
+                                        <h3 class="card-title">#{{ $loop->iteration }} {{ $employee->nombre }} {{ $employee->apellido }}</h3>
+                                        
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <p class="card-text">
+                                                    <strong>Rol:</strong> {{ $employee->rol ? ucfirst($employee->rol->rol) : 'Sin rol asignado' }}
+                                                </p>
+                                            </div>
+                                            <div class="col-4">
+                                                <p class="card-text">
+                                                    <strong>Aula de referencia:</strong> {{ $employee->aula }}
+                                                </p>
+                                            </div>
+                                            <div class="col-4">
+                                                <a href="{{ url('/empleado/' . $employee->id . '/editar') }}" class="btn btn-warning me-2">
+                                                    <i class="fas fa-solid fa-pen"></i> Modificar
+                                                </a>
+                                                <a href="{{ url('/empleado/' . $employee->id . '/eliminar') }}" class="btn btn-danger"
+                                                   onclick="return confirm('¿Estás seguro de eliminar este empleado?')">
+                                                    <i class="fas fa-solid fa-trash"></i> Eliminar
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                        
                 </div>
             </div>
         </div>
