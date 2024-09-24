@@ -3,6 +3,7 @@
 use App\Http\Controllers\BackController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TareasController;
+use App\Http\Controllers\MedioController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,6 +45,8 @@ Route::patch('/panel/tareas/tasks/{id}/cerrar', [TareasController::class, 'cerra
 
 /*DRIVE=============================================================*/
 Route::get('/panel/medios-drive', [BackController::class, 'verDrive'])->name('drive.show');
+Route::delete('/panel/medios-drive/{id}', [MedioController::class, 'destroy'])->name('medios.destroy');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

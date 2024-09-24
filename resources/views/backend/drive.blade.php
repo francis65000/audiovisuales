@@ -20,15 +20,32 @@
                     @if ($mediosDrive->isEmpty())
                         <p>No hay medios disponibles.</p>
                     @else
-                        @foreach ($mediosDrive as $medio)
-                            <div class="card bg-success text-white mb-2">
-                                <div class="card-body d-flex align-items-center justify-content-between">
-                                    <a class="text-white stretched-link text-decoration-none" href="{{$medio->url}}" target="_blank"><i
-                                            class="fas fa-solid fa-folder"></i> {{$medio->anio}}</a>
-                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        <div class="row">
+                            @foreach ($mediosDrive as $medio)
+                                <div class="col-xl-3 col-md-6">
+                                    <div class="card bg-success text-white mb-2">
+                                        <div class="card-body d-flex align-items-center justify-content-between">
+                                            <a class="text-white stretched-link text-decoration-none fs-4"
+                                                href="{{ $medio->url }}" target="_blank">
+                                                <i class="fas fa-solid fa-folder fs-1"></i> 
+                                            <br> CURSO {{ $medio->anio }}</a>
+                                            <!--boton de eliminar-->
+                                        </div>
+                                        <div class="card-footer d-flex align-items-center justify-content-between">
+                                            <form action="{{ route('medios.destroy', $medio->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger"
+                                                    onclick="return confirm('¿Estás seguro de que deseas eliminar esta carpeta?');">
+                                                    <i class="fas fa-solid fa-trash"></i> Eliminar
+                                                </button>
+                                            </form>
+                                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
                     @endif
                 </div>
             </div>
