@@ -8,6 +8,10 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-solid fa-house"></i></div>
                     Inicio
                 </a>
+                <a class="nav-link" href="{{url("/panel/medios-drive")}}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-brands fa-google-drive"></i></div>
+                    Archivo Medios
+                </a>
                 <!--GRUPO 2-->
                 <div class="sb-sidenav-menu-heading">Personal Departamento</div>
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">

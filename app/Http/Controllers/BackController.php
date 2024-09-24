@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Personal;
 use App\Models\Roles;
-use App\Models\Tarea;
 use App\Models\Tareas;
+use App\Models\Medio;
 use Illuminate\Http\Request;
 
 class BackController extends Controller
@@ -54,5 +54,13 @@ class BackController extends Controller
 
 
         return view('backend.cuadrantetareas', compact('tareasPanificadas', 'tareasEnProceso', 'tareasTerminadas'));
+    }
+
+    public function verDrive(Request $request)
+    {
+
+        $mediosDrive = Medio::orderBy('created_at', 'desc')->get(); 
+
+        return view('backend.drive', compact('mediosDrive'));
     }
 }

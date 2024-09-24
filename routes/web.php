@@ -42,7 +42,8 @@ Route::patch('/panel/tareas/tasks/{id}/estado', [TareasController::class, 'updat
 //CERRAR TAREA
 Route::patch('/panel/tareas/tasks/{id}/cerrar', [TareasController::class, 'cerrarTarea'])->name('tasks.cerrarTarea');
 
-
+/*DRIVE=============================================================*/
+Route::get('/panel/medios-drive', [BackController::class, 'verDrive'])->name('drive.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
