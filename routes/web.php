@@ -4,6 +4,7 @@ use App\Http\Controllers\BackController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TareasController;
 use App\Http\Controllers\MedioController;
+use App\Http\Controllers\UsuariosController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +32,19 @@ Route::get('/panel', [BackController::class, 'verHome'])
 
 /*PERSONAL================================================*/
 Route::get('/panel/personal', [BackController::class, 'verPersonal'])->name('personal.show');
+Route::get('/panel/personal/gestion-usuarios', [BackController::class, 'verGestionUsuarios'])->name('personal.gestion');
+Route::get('/panel/personal/crear', [UsuariosController::class, 'crearPersonal'])->name('personal.crear');
+Route::post('/panel/personal/insertar', [UsuariosController::class, 'store'])->name('personal.store');
+
+Route::get('/panel/personal/editar/{id}', [UsuariosController::class, 'editarPersonal'])->name('personal.editar');
+
+
+
+
+
+/*ROLES===========================================================*/
+Route::get('/panel/roles', [BackController::class, 'verRoles'])->name('roles.show');
+
 
 
 /*CUADRANTE TAREAS================================================*/
@@ -38,8 +52,10 @@ Route::get('/panel/cuadrante-tareas', [BackController::class, 'verCuadroTareas']
 Route::get('/panel/tareas/crear', [TareasController::class, 'crearTarea'])->name('tareas.crear');
 Route::post('/panel/tareas/tasks', [TareasController::class, 'store'])->name('tasks.store');
 Route::delete('/panel/tareas/tasks/{id}', [TareasController::class, 'destroy'])->name('tasks.destroy');
+
 //CAMBIAR A EN PROCESO
 Route::patch('/panel/tareas/tasks/{id}/estado', [TareasController::class, 'updateEstado'])->name('tasks.updateEstado');
+
 //CERRAR TAREA
 Route::patch('/panel/tareas/tasks/{id}/cerrar', [TareasController::class, 'cerrarTarea'])->name('tasks.cerrarTarea');
 
@@ -48,6 +64,7 @@ Route::get('/panel/medios-drive', [BackController::class, 'verDrive'])->name('dr
 Route::get('/panel/medios-drive/crear', [MedioController::class, 'crearMedio'])->name('medios.crear');
 Route::post('/panel/medios-drive', [MedioController::class, 'store'])->name('medios.store');
 Route::delete('/panel/medios-drive/{id}', [MedioController::class, 'destroy'])->name('medios.destroy');
+
 
 
 Route::middleware('auth')->group(function () {

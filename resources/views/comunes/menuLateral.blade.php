@@ -13,7 +13,7 @@
                     Archivo Medios
                 </a>
                 <!--GRUPO 2-->
-                <div class="sb-sidenav-menu-heading">Personal Departamento</div>
+                <div class="sb-sidenav-menu-heading">Usuarios</div>
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                     <div class="sb-nav-link-icon"><i class="fas fa-solid fa-user"></i></div>
                     Personal
@@ -21,9 +21,9 @@
                 </a>
                 <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="{{url("/panel/personal")}}">Fichas personal</a>
-                        <a class="nav-link" href="layout-sidenav-light.html">Gestión usuarios</a>
-                        <a class="nav-link" href="layout-sidenav-light.html">Roles</a>
+                        <a class="nav-link" href="{{url("/panel/personal")}}">Personal</a>
+                        <a class="nav-link" href="{{url("/panel/personal/gestion-usuarios")}}">Gestión usuarios</a>
+                        <a class="nav-link" href="{{url("/panel/roles")}}">Roles</a>
                     </nav>
                 </div>
                 <!--GRUPO 3-->
