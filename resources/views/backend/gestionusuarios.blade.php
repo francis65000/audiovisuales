@@ -83,9 +83,11 @@
                                                                     <i class="fas fa-solid fa-user-edit"></i> Modificar
                                                                 </a>
 
-                                                                <a href="{{url('/panel/personal/eliminar/'.$employee->id)}}" class="btn btn-danger">
-                                                                    <i class="fas fa-solid fa-user-times"></i> Eliminar
-                                                                </a>
+                                                                <form action="{{ route('personal.destroy', ['id' => $employee->id]) }}" method="POST">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="btn btn-danger"><i class="fas fa-solid fa-user-times"></i> Eliminar </button>
+                                                                </form>
                                                                 
                                                             </div>
                                                         </div>

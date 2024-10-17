@@ -37,6 +37,8 @@ Route::get('/panel/personal/crear', [UsuariosController::class, 'crearPersonal']
 Route::post('/panel/personal/insertar', [UsuariosController::class, 'store'])->name('personal.store');
 
 Route::get('/panel/personal/editar/{id}', [UsuariosController::class, 'editarPersonal'])->name('personal.editar');
+Route::post('/panel/personal/actualizar/{id}', [UsuariosController::class, 'update'])->name('personal.update');
+Route::delete('/panel/personal/eliminar/{id}', [UsuariosController::class, 'destroy'])->name('personal.destroy');
 
 
 

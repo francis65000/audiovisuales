@@ -26,7 +26,12 @@ class BackController extends Controller
 
         $mediosDrive = Medio::orderBy('created_at', 'desc')->take(4)->get();
 
-        return view('backend.home', compact('tareasPendientes', 'conteoTareasPendientes', 'mediosDrive'));
+        //alimentar contadores
+        $cuentaUsuarios = User::count();
+        $cuentaMedios = Medio::count();
+        $cuentaTareas = Tareas::count();
+
+        return view('backend.home', compact('tareasPendientes', 'conteoTareasPendientes', 'mediosDrive', 'cuentaUsuarios', 'cuentaMedios', 'cuentaTareas'));
     }
 
     public function verPersonal(Request $request)

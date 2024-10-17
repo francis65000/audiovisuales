@@ -65,4 +65,45 @@ class UsuariosController extends Controller
         // Pasar el usuario a la vista
         return view('backend.editarpersonal', compact('personal', 'roles', 'user'));
     }
+
+    //actualizar usuario
+    public function update(Request $request, $id)
+    {
+        // Validar los datos del formulario
+        $request->validate([
+            'nombre' => 'required',
+            'name' => 'required',
+            'email' => 'required|email',
+            'rol_id' => 'required',
+        ]);
+
+        // Actualizar el usuario
+        $personal = Personal::find($id);
+        $personal->nombre = $request->nombre;
+        $personal->rol_id = $request->rol_id;
+        $personal->aula = $request->aula;
+        $personal->save();
+
+        $user = User::where('name', $personal->nombre)->first();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        // Redirigir a la página de personal
+        return redirect()->route('personal.gestion');
+    }
+
+    //eliminar usuario
+    public function destroy($id)
+    {
+        // Eliminar el usuario
+        $personal = Personal::find($id);
+        $user = User::where('name', $personal->nombre)->first();
+        $personal->delete();
+        $user->delete();
+
+        // Redirigir a la página de personal
+        return redirect()->route('personal.gestion');
+    }
 }

@@ -40,7 +40,7 @@
 
                             @endphp
 
-                            <div class="col-6 mb-4"> <!-- Mantener en 2 columnas -->
+                            <div class="col-12 mb-4"> <!-- Mantener en 2 columnas -->
                                 <div class="card {{ $rol->rol ?? 'default-role-class' }}">
                                     <!-- Clase por defecto si no hay rol -->
                                     <div class="card-body">

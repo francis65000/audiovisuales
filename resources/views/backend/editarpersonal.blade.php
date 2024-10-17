@@ -11,7 +11,7 @@
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item active">Departamento de Audiovisuales</li>
             </ol>
-            <form action="{{ route('personal.store') }}" method="POST" onsubmit="return validarFormulario()">
+            <form action="{{ route('personal.update', ['id' => $personal->id]) }}" method="POST" onsubmit="return validarFormulario()">
                 @csrf
                 <div class="row">
 
@@ -99,12 +99,12 @@
                                     <div class="col-md-6">
                                         <label for="password" class="form-label">Nueva Contraseña</label>
                                         <input type="password" class="form-control form-control-sm" id="password"
-                                            name="password" required>
+                                            name="password" >
                                     </div>
                                     <div class="col-md-6">
                                         <label for="password_confirmation" class="form-label">Repite la nueva contraseña</label>
                                         <input type="password" class="form-control form-control-sm"
-                                            id="password_confirmation" name="password_confirmation" required>
+                                            id="password_confirmation" name="password_confirmation" >
                                     </div>
                                 </div>
                             </div>

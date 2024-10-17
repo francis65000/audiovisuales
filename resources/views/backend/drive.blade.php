@@ -28,8 +28,8 @@
                                         <div class="card-body d-flex align-items-center justify-content-between">
                                             <a class="text-white  text-decoration-none fs-4" href="{{ $medio->url }}"
                                                 target="_blank">
-                                                <i class="fas fa-solid fa-folder fa-3x mb-2"></i>
-                                                <br> CURSO {{ $medio->anio }}
+                                                <i class="fas fa-solid fa-folder fa-1x opacity-75"></i>
+                                                 CURSO {{ $medio->anio }}
                                             </a>
                                             <!--boton de eliminar-->
                                         </div>

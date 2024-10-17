@@ -34,37 +34,48 @@
             <div class="row">
                 <div class="col-xl-3 col-md-6">
                     <div class="card bg-primary text-white mb-4">
-                        <div class="card-body">Personal</div>
+                        <div class="card-body">
+                            <h1>{{$cuentaUsuarios}}</h1>
+                            Usuarios
+                        </div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" href="#">Ver más</a>
+                            <a class="small text-white stretched-link text-decoration-none" href="{{url('/panel/personal')}}">Personal</a>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6">
                     <div class="card bg-warning text-white mb-4">
-                        <div class="card-body">Archivo Medios</div>
+                        <div class="card-body">
+                            <h1>{{$cuentaMedios}}</h1>
+                            Carpetas de Medios
+                        </div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" href="#">Ver más</a>
+                            <a class="small text-white stretched-link text-decoration-none" href="{{url('/panel/medios-drive')}}">Archivo Medios</a>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6">
                     <div class="card bg-success text-white mb-4">
-                        <div class="card-body">Panel de Tareas</div>
+                        <div class="card-body">
+                            <h1>{{$cuentaTareas}}</h1>
+                            Tareas
+                        </div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" href="{{ url('/panel/cuadrante-tareas') }}">Ver
-                                más</a>
+                            <a class="small text-white stretched-link text-decoration-none" href="{{ url('/panel/cuadrante-tareas') }}">Panel de Tareas</a>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6">
                     <div class="card bg-danger text-white mb-4">
-                        <div class="card-body">Semana Cultural</div>
+                        <div class="card-body">
+                            <h1>0</h1>
+                            Eventos
+                        </div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" href="#">Ver más</a>
+                            <a class="small text-white stretched-link text-decoration-none" href="#">Semana Cultural</a>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
