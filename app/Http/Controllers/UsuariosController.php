@@ -14,13 +14,13 @@ class UsuariosController extends Controller
     //
     public function crearPersonal(Request $request)
     {
-         // Filtramos los IDs de personal que queremos obtener
+        // Filtramos los IDs de personal que queremos obtener
 
-         // Obtener los registros de personal filtrados por ID
-         $roles = Roles::all();
-         
-         // Combina los resultados para pasarlos a la vista
-         return view('backend.nuevopersonal', compact('roles'));
+        // Obtener los registros de personal filtrados por ID
+        $roles = Roles::all();
+
+        // Combina los resultados para pasarlos a la vista
+        return view('backend.nuevopersonal', compact('roles'));
     }
 
     //añadir nuevo usuario a la tabla user y a la tabla personal
@@ -87,7 +87,12 @@ class UsuariosController extends Controller
         $user = User::where('name', $personal->nombre)->first();
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = Hash::make($request->password);
+
+        // Solo actualizar el password si se proporciona un valor
+        if (!empty($request->password)) {
+            $user->password = Hash::make($request->password);
+        }
+
         $user->save();
 
         // Redirigir a la página de personal

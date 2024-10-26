@@ -67,6 +67,12 @@ Route::get('/panel/medios-drive/crear', [MedioController::class, 'crearMedio'])-
 Route::post('/panel/medios-drive', [MedioController::class, 'store'])->name('medios.store');
 Route::delete('/panel/medios-drive/{id}', [MedioController::class, 'destroy'])->name('medios.destroy');
 
+/*CUADRANTE TURNOS SEMANA CULTURAL============================================================*/
+Route::get('/panel/cuadrante-turnos', [BackController::class, 'verCuadroTurnos'])->name('cuadranteTurnos.show');
+
+
+/*CHAT============================================================*/
+Route::get('/panel/chat', [BackController::class, 'verChat'])->name('chat.show');
 
 
 Route::middleware('auth')->group(function () {

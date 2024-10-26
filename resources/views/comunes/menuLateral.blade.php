@@ -34,9 +34,13 @@
                 </a>
                 <!--GRUPO 4-->
                 <div class="sb-sidenav-menu-heading">SEMANA CULTURAL</div>
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="{{url("/panel/cuadrante-turnos/")}}">
                     <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                     Cuadrante de turnos
+                </a>
+                <a class="nav-link" href="{{url("/panel/chat/")}}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                    Comunicaciones
                 </a>
             </div>
         </div>

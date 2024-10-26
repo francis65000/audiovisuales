@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Chat;
 use App\Models\Personal;
 use App\Models\Roles;
 use App\Models\Tareas;
@@ -100,5 +101,16 @@ class BackController extends Controller
  
          // Combina los resultados para pasarlos a la vista
          return view('backend.gestionusuarios', compact('personal', 'roles', 'users'));
+    }
+
+    public function verCuadroTurnos(Request $request)
+    {
+        return view('backend.cuadroturnos');
+    }
+
+    public function verChat(Request $request)
+    {
+        $chats = Chat::orderBy('fecha', 'asc')->get();
+        return view('backend.chat', compact('chats'));
     }
 }
