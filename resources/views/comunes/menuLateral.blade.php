@@ -39,7 +39,7 @@
                     Cuadrante de turnos
                 </a>
                 <a class="nav-link" href="{{url("/panel/chat/")}}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                    <div class="sb-nav-link-icon"><i class="fas fa-solid fa-comment"></i></div>
                     Comunicaciones
                 </a>
             </div>

@@ -8,6 +8,7 @@ use App\Models\Roles;
 use App\Models\Tareas;
 use App\Models\Medio;
 use App\Models\User;
+use App\Models\Turnos;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -105,7 +106,12 @@ class BackController extends Controller
 
     public function verCuadroTurnos(Request $request)
     {
-        return view('backend.cuadroturnos');
+        // Obtener los turnos de la base de datos
+        $turnos = Turnos::all();
+
+        //Obtener los dias
+        $dias = DB::table('dias_semana_cultural')->get();
+        return view('backend.cuadroturnos', compact('dias', 'turnos'));
     }
 
     public function verChat(Request $request)
