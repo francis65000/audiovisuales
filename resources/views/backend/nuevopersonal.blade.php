@@ -34,8 +34,8 @@
                                         <select class="form-select form-select-sm" id="rol_id" name="rol_id" required>
                                             <option value="" selected>Selecciona un rol</option>
                                             <option value="1">Jefaso</option>
-                                            <option value="2">Colaborador</option>
-                                            <option value="3">Lector</option>
+                                            <option value="3">Colaborador</option>
+                                            <option value="5">Lector</option>
                                         </select>
                                     </div>
                                 </div>

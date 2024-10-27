@@ -54,8 +54,40 @@
                             <h3>{{ $dia->dia }} {{ \Carbon\Carbon::parse($dia->fecha)->translatedFormat('d M Y') }}</h3>
 
                             <form action="{{ route('turnos.actualizar', $dia->id) }}" method="POST">
+
                                 @csrf
 
+                                <div class="mb-3 row">
+                                    <!--DIA------------------------------------------------------------>
+                                    <div class="col-md-2">
+                                        <div class="card rounded-0 shadow">
+                                            <div class="card-body text-center fondo-warning text-white">
+                                                <h5 class="card-title">Día</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="card-body text-center text-white">
+                                            <input type="text" class="form-control" id="dia"
+                                                name="dia" value="{{ $dia->dia }}">
+                                        </div>
+                                    </div>
+                                    <!--HORA----------------------------------------------------------->
+                                    <div class="col-md-2">
+                                        <div class="card rounded-0 shadow">
+                                            <div class="card-body text-center fondo-warning text-white">
+                                                <h5 class="card-title">Fecha</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="card-body text-center text-white">
+                                            <input type="date" class="form-control" id="fecha"
+                                                name="fecha" value="{{ $dia->fecha }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--FRANJAS HORARIAS-------------------------------------------------->
                                 @foreach ($turnosPorHora as $hora => $turno)
                                     <div class="mb-3 row">
                                         <!-- Columna para el encabezado del turno -->

@@ -28,12 +28,17 @@ class BackController extends Controller
 
         $mediosDrive = Medio::orderBy('created_at', 'desc')->take(4)->get();
 
+        //sacar la fecha de hoy
+        $hoy = date('Y-m-d');
+
         //alimentar contadores
         $cuentaUsuarios = User::count();
         $cuentaMedios = Medio::count();
         $cuentaTareas = Tareas::count();
+        //partiendo de la fecha de hoy, sacar los mensajes que hay hoy 
+        $chats = Chat::where('fecha', $hoy)->count();
 
-        return view('backend.home', compact('tareasPendientes', 'conteoTareasPendientes', 'mediosDrive', 'cuentaUsuarios', 'cuentaMedios', 'cuentaTareas'));
+        return view('backend.home', compact('tareasPendientes', 'conteoTareasPendientes', 'mediosDrive', 'cuentaUsuarios', 'cuentaMedios', 'cuentaTareas', 'chats'));
     }
 
     public function verPersonal(Request $request)

@@ -6,6 +6,7 @@ use App\Http\Controllers\TareasController;
 use App\Http\Controllers\MedioController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\TurnoController;
+use App\Http\Controllers\ChatController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -72,9 +73,13 @@ Route::delete('/panel/medios-drive/{id}', [MedioController::class, 'destroy'])->
 Route::get('/panel/cuadrante-turnos', [BackController::class, 'verCuadroTurnos'])->name('cuadranteTurnos.show');
 Route::get('/panel/turnos/{dia}/editar', [TurnoController::class, 'editar'])->name('turnos.editar');
 Route::post('/panel/turnos/{dia}/actualizar', [TurnoController::class, 'actualizar'])->name('turnos.actualizar');
+Route::post('/panel/vaciar-personal', [TurnoController::class, 'vaciarPersonal'])->name('vaciar.personal');
+
 
 /*CHAT============================================================*/
 Route::get('/panel/chat', [BackController::class, 'verChat'])->name('chat.show');
+Route::post('/panel/enviar-mensaje', [ChatController::class, 'store'])->name('chat.send');
+Route::post('/panel/chat-delete', [ChatController::class, 'destroy'])->name('chat.delete');
 
 
 Route::middleware('auth')->group(function () {

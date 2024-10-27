@@ -34,37 +34,58 @@
             <!--LEYENDA DE COLORES-->
             <h3 class="mt-4 text-right">Leyenda de Colores</h3>
             <div class="row text-center">
-
-                <div class="col-xl-2 col-md-4">
-                    <div class="card bg-info text-white mb-4">
-                        <div class="card-body text-dark fw-bold">PLANIFICACIÓN</div>
-                    </div>
-                </div>
-                <div class="col-xl-2 col-md-4">
-                    <div class="card bg-yellow text-white mb-4">
-                        <div class="card-body text-dark fw-bold">OTROS</div>
-                    </div>
-                </div>
-                <div class="col-xl-2 col-md-4">
-                    <div class="card bg-orange text-white mb-4">
-                        <div class="card-body text-dark fw-bold">GRADUACIONES</div>
-                    </div>
-                </div>
-                <div class="col-xl-2 col-md-4">
-                    <div class="card bg-green text-white mb-4">
-                        <div class="card-body text-dark fw-bold">EVENTOS</div>
-                    </div>
-                </div>
-                <div class="col-xl-2 col-md-4">
-                    <div class="card bg-pink text-white mb-4">
-                        <div class="card-body text-dark fw-bold">SEMANA CULTURAL</div>
+                <div class="col-12">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-2 col-md-4 col-sm-6 mb-4">
+                            <div class="card bg-info h-100">
+                                <div class="card-body d-flex align-items-center justify-content-center fw-bold">
+                                    PLANIFICACIÓN
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-md-4 col-sm-6 mb-4">
+                            <div class="card bg-yellow h-100">
+                                <div class="card-body d-flex align-items-center justify-content-center fw-bold">
+                                    OTROS
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-md-4 col-sm-6 mb-4">
+                            <div class="card bg-orange h-100">
+                                <div class="card-body d-flex align-items-center justify-content-center fw-bold">
+                                    GRADUACIONES
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-md-4 col-sm-6 mb-4">
+                            <div class="card bg-green h-100">
+                                <div class="card-body d-flex align-items-center justify-content-center fw-bold">
+                                    EVENTOS
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-md-4 col-sm-6 mb-4">
+                            <div class="card bg-pink h-100">
+                                <div class="card-body d-flex align-items-center justify-content-center fw-bold">
+                                    SEMANA CULTURAL
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <!--AQUI EMPIEZAN LAS TABLAS-->
             <a href="{{ url('/panel/tareas/crear') }}" class="btn btn-primary mb-2"><i class="fas fa-solid fa-plus"></i>
                 Nueva tarea</a>
+            @php
+                use Illuminate\Support\Facades\DB;
 
+                // Obtener el nombre del usuario autenticado
+                $usuarioNombre = Auth::user()->name;
+
+                // Consultar la tabla 'personal' para obtener el rol del usuario
+                $rolUsuario = DB::table('personal')->where('nombre', $usuarioNombre)->value('rol_id');
+            @endphp
             <!--PLANIFICADAS//////////////////////////////////////////////////////////////////////////////////////////////////////-->
             <div class="card mb-4">
                 <div class="card-header">
@@ -81,31 +102,36 @@
                                     <div class="card text-white mb-4 {{ $tarea->categoria }}">
                                         <div class="card-body text-dark">
                                             <h5 class="text-uppercase">{{ $tarea->titulo }}</h5>
-                                            <p>Apertura: {{ \Carbon\Carbon::parse($tarea->created_at)->format('d-m-Y') }}</p>
+                                            <p>Apertura: {{ \Carbon\Carbon::parse($tarea->created_at)->format('d-m-Y') }}
+                                            </p>
                                             <p>{{ $tarea->descripcion }}</p>
                                             <p><i>Creador: {{ $tarea->creado_por }}</i>
                                                 <br>
                                                 <i>Actualizado: {{ $tarea->actualizado_por }}</i>
                                             </p>
-                                            <form action="{{ route('tasks.updateEstado', $tarea->id) }}" method="POST" style="display: inline;">
+                                            <form action="{{ route('tasks.updateEstado', $tarea->id) }}" method="POST"
+                                                style="display: inline;">
                                                 @csrf
                                                 @method('PATCH')
-                                                <button type="submit" class="btn btn-success mb-2" onclick="return confirm('¿Estás seguro de que deseas cambiar el estado a En proceso?');">
+                                                <button type="submit" class="btn btn-success mb-2"
+                                                    onclick="return confirm('¿Estás seguro de que deseas cambiar el estado a En proceso?');">
                                                     <i class="fas fa-solid fa-arrows-spin"></i> En proceso
                                                 </button>
                                             </form>
                                             <a href="#" class="btn btn-warning mb-2"><i
                                                     class="fas fa-solid fa-pen-to-square"></i>
                                                 Modificar</a>
-                                            <form action="{{ route('tasks.destroy', $tarea->id) }}" method="POST"
-                                                style="display: inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger mb-2"
-                                                    onclick="return confirm('¿Estás seguro de que deseas eliminar esta tarea?');">
-                                                    <i class="fas fa-solid fa-trash"></i> Eliminar
-                                                </button>
-                                            </form>
+                                            @if (Auth::check() && $rolUsuario === 1)
+                                                <form action="{{ route('tasks.destroy', $tarea->id) }}" method="POST"
+                                                    style="display: inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger mb-2"
+                                                        onclick="return confirm('¿Estás seguro de que deseas eliminar esta tarea?');">
+                                                        <i class="fas fa-solid fa-trash"></i> Eliminar
+                                                    </button>
+                                                </form>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -130,31 +156,36 @@
                                     <div class="card text-white mb-4 {{ $tarea->categoria }}">
                                         <div class="card-body text-dark">
                                             <h5 class="text-uppercase">{{ $tarea->titulo }}</h5>
-                                            <p>Apertura: {{ \Carbon\Carbon::parse($tarea->created_at)->format('d-m-Y') }}</p>
+                                            <p>Apertura: {{ \Carbon\Carbon::parse($tarea->created_at)->format('d-m-Y') }}
+                                            </p>
                                             <p>{{ $tarea->descripcion }}</p>
                                             <p><i>Creador: {{ $tarea->creado_por }}</i>
                                                 <br>
                                                 <i>Actualizado: {{ $tarea->actualizado_por }}</i>
                                             </p>
-                                            <form action="{{ route('tasks.cerrarTarea', $tarea->id) }}" method="POST" style="display: inline;">
+                                            <form action="{{ route('tasks.cerrarTarea', $tarea->id) }}" method="POST"
+                                                style="display: inline;">
                                                 @csrf
                                                 @method('PATCH')
-                                                <button type="submit" class="btn btn-success mb-2" onclick="return confirm('¿Estás seguro de que deseas cambiar el estado a Terminada?');">
+                                                <button type="submit" class="btn btn-success mb-2"
+                                                    onclick="return confirm('¿Estás seguro de que deseas cambiar el estado a Terminada?');">
                                                     <i class="fas fa-solid fa-arrows-spin"></i> Terminada
                                                 </button>
                                             </form>
                                             <a href="#" class="btn btn-warning mb-2"><i
                                                     class="fas fa-solid fa-pen-to-square"></i>
                                                 Modificar</a>
-                                            <form action="{{ route('tasks.destroy', $tarea->id) }}" method="POST"
-                                                style="display: inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger mb-2"
-                                                    onclick="return confirm('¿Estás seguro de que deseas eliminar esta tarea?');">
-                                                    <i class="fas fa-solid fa-trash"></i> Eliminar
-                                                </button>
-                                            </form>
+                                            @if (Auth::check() && $rolUsuario === 1)
+                                                <form action="{{ route('tasks.destroy', $tarea->id) }}" method="POST"
+                                                    style="display: inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger mb-2"
+                                                        onclick="return confirm('¿Estás seguro de que deseas eliminar esta tarea?');">
+                                                        <i class="fas fa-solid fa-trash"></i> Eliminar
+                                                    </button>
+                                                </form>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -179,21 +210,24 @@
                                     <div class="card text-white mb-4 {{ $tarea->categoria }}">
                                         <div class="card-body text-dark">
                                             <h5 class="text-uppercase">{{ $tarea->titulo }}</h5>
-                                            <p>Apertura: {{ \Carbon\Carbon::parse($tarea->created_at)->format('d-m-Y') }}</p>
+                                            <p>Apertura: {{ \Carbon\Carbon::parse($tarea->created_at)->format('d-m-Y') }}
+                                            </p>
                                             <p>{{ $tarea->descripcion }}</p>
                                             <p><i>Creador: {{ $tarea->creado_por }}</i>
                                                 <br>
                                                 <i>Actualizado: {{ $tarea->actualizado_por }}</i>
                                             </p>
-                                            <form action="{{ route('tasks.destroy', $tarea->id) }}" method="POST"
-                                                style="display: inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger mb-2"
-                                                    onclick="return confirm('¿Estás seguro de que deseas eliminar esta tarea?');">
-                                                    <i class="fas fa-solid fa-trash"></i> Eliminar
-                                                </button>
-                                            </form>
+                                            @if (Auth::check() && $rolUsuario === 1)
+                                                <form action="{{ route('tasks.destroy', $tarea->id) }}" method="POST"
+                                                    style="display: inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger mb-2"
+                                                        onclick="return confirm('¿Estás seguro de que deseas eliminar esta tarea?');">
+                                                        <i class="fas fa-solid fa-trash"></i> Eliminar
+                                                    </button>
+                                                </form>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -202,10 +236,15 @@
                     @endif
                 </div>
             </div>
-            <h5>Vaciar Cuadrante de tareas</h5>
-            <h5 class="btn btn-danger fw-bold">¡IMPORTANTE!</h5>
-            <p>Vaciar el cuadrante de tareas es un proceso que no se puede deshacer, se eliminarán todas las tareas del cuadrante.</p>
-            <a href="#" class="btn btn-danger mb-2" onclick="return confirm('¿Estás seguro de que deseas vaciar todo el cuadrante?');"><i class="fas fa-solid fa-trash"></i> Eliminar todo</a>
+            @if (Auth::check() && $rolUsuario === 1)
+                <h5>Vaciar Cuadrante de tareas</h5>
+                <h5 class="btn btn-danger fw-bold">¡IMPORTANTE!</h5>
+                <p>Vaciar el cuadrante de tareas es un proceso que no se puede deshacer, se eliminarán todas las tareas del
+                    cuadrante.</p>
+                <a href="#" class="btn btn-danger mb-2"
+                    onclick="return confirm('¿Estás seguro de que deseas vaciar todo el cuadrante?');"><i
+                        class="fas fa-solid fa-trash"></i> Eliminar todo</a>
+            @endif
         </div>
     </main>
 

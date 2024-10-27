@@ -24,7 +24,7 @@ class Turnos extends Model
         return [
             'dia' => 'required|integer|between:1,5', // entre 1 y 5
             'hora' => 'required|integer|between:1,6', // entre 1 y 6
-            'personal' => 'required|string', // solo requerido y de tipo string, sin límite específico
+            'personal' => 'string', // solo requerido y de tipo string, sin límite específico
         ];
     }
 }

@@ -28,6 +28,10 @@
             background-color: #ffc107;
         }
 
+        .fondo-danger {
+            background-color: #dc3545;
+        }
+
         .fixed-height {
             height: auto;
             /* Ajusta este valor según tus necesidades */
@@ -54,8 +58,8 @@
             </ol>
             <div class="card mb-4">
                 <div class="card-header">
-                    <i class="fas fa-table me-1"></i>
-                    ---
+                    <i class="fas fa-solid fa-calendar-days"></i>
+                    Cuadrante de turnos semana cultural
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -74,7 +78,16 @@
                                         </div>
                                     </div>
                                 @endforeach
-
+                                <div class="card m-0 p-0 rounded-0 shadow mb-1">
+                                    <div class="card-body text-center p-3 fondo-danger text-white">
+                                        <form action="{{ route('vaciar.personal') }}" method="POST" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas vaciar el cuadrante entero? Esta acción no se puede deshacer.');">
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger" onsubmit="return confirm('¿Estás seguro de que deseas vaciar el cuadrante entero? Esta acción no se puede deshacer.');">
+                                                <i class="fas fa-solid fa-trash-can"></i> Eliminar
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <!-- ESTRUCTURA DE DIAS SUPERIOR -->
@@ -85,8 +98,8 @@
                                     <div class="card m-0 p-0 rounded-0 shadow mb-1">
                                         <div class="card-body text-center p-3 fondo text-white">
                                             <h5 class="card-title">
-                                                {{ $dia->dia }} de
-                                                {{ \Carbon\Carbon::parse($dia->fecha)->translatedFormat('d M') }}
+                                                {{ $dia->dia }}
+                                                {{ \Carbon\Carbon::parse($dia->fecha)->translatedFormat('d M Y') }}
                                             </h5>
                                         </div>
                                     </div>
@@ -102,17 +115,15 @@
 
                                                     </div>
                                                 </div>
-                                            @else
-                                                <!-- Si está vacío o es un guion, no se muestra nada -->
+                                            @endif
+                                            @if ($turno->personal === '-')
                                                 <div class="card rounded-0 shadow mb-1 atencion">
                                                     <div class="card-body text-center p-3 bg-light atencion">
                                                         <h5 class="card-title atencion">
                                                             <i class="fas fa-exclamation-triangle"></i> No asignada
                                                         </h5>
                                                     </div>
-                                                </div>
-                                                
-                                                <!-- O eliminar esta línea si no quieres mostrar nada -->
+                                                </div>                           
                                             @endif
                                         @endif
                                     @endforeach

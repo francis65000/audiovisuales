@@ -38,6 +38,22 @@ class TurnoController extends Controller
             );
         }
 
+        //actualizar el dia en la tabla dissemanacultural
+        Diassemanacultural::where('id', $diaId)->update([
+            'fecha' => $request->fecha,  // Almacena la fecha actual en formato 'YYYY-MM-DD'
+            'dia' => $request->dia  // Usa el valor personalizado del día que pases en $dia
+        ]);
+
+
         return redirect()->route('cuadranteTurnos.show')->with('success', 'Turnos actualizados correctamente');
     }
+
+    public function vaciarPersonal()
+    {
+        // Vaciar la columna 'personal' estableciendo su valor a una cadena vacía
+        Turnos::query()->update(['personal' => '']);
+
+        return redirect()->back()->with('mensaje', 'Tabla turnos vaciada con éxito.');
+    }
+
 }

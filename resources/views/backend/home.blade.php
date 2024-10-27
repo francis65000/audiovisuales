@@ -71,11 +71,11 @@
                 <div class="col-xl-3 col-md-6">
                     <div class="card bg-danger text-white mb-4">
                         <div class="card-body">
-                            <h1>0</h1>
-                            Eventos
+                            <h1>{{$chats}}</h1>
+                            Mensajes hoy
                         </div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link text-decoration-none" href="#">Semana Cultural</a>
+                            <a class="small text-white stretched-link text-decoration-none" href="{{url("/panel/chat")}}">Comunicaciones</a>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>

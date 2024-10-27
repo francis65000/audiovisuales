@@ -49,9 +49,9 @@
     <main>
         <div class="container-fluid px-4">
             <!--<h1 class="mt-4">Comunicaciones</h1>
-            <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item active">Departamento de Audiovisuales</li>
-            </ol>-->
+                                        <ol class="breadcrumb mb-4">
+                                            <li class="breadcrumb-item active">Departamento de Audiovisuales</li>
+                                        </ol>-->
             <div class="card mb-4 mt-3">
                 <div class="card-header">
                     <i class="fas fa-regular fa-comment"></i>
@@ -59,7 +59,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="card p-4" style="height: 600px; overflow-y: auto;">
+                        <div class="card p-4" id="chatContainer" style="height: 600px; overflow-y: auto;">
                             <!-- Ajusta la altura según sea necesario -->
                             <!-- Bucle con los mensajes -->
                             @php
@@ -93,34 +93,86 @@
                                             class="card p-2 {{ $mensaje->nombre_usuario == Auth::user()->name ? 'mi-mensaje' : 'otro-mensaje' }}">
                                             <p class="fw-bold">{{ $mensaje->nombre_usuario }}</p>
                                             <p class="fs-5">{{ $mensaje->mensaje }}</p>
-                                            <p class="">{{ $fechaMensaje->format('H:i') }}</p>
+                                            <p class="mb-0">{{ $fechaMensaje->format('H:i') }}</p>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
+                            <!--En caso de que no haya mensajes que diga que no hay mensajes-->
+                            @if (count($chats) == 0)
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <div class="text-center">
+                                            <div class="card alert alert-danger p-3" style="display: inline-block;">
+                                                <h2 class="fs-1"><i class="fas fa-solid fa-circle-exclamation"></i></h2>
+                                                <h3 class="fs-3">No hay mensajes</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
+                    <form action="{{ route('chat.send') }}" method="POST">
+                        @csrf
+                        <div class="row">
+                            <!--INPUTS QUE NO SE VEN-->
+                            <div class="col-md-6 mb-3">
+                                <input type="text" id="nombre_usuario" name="nombre_usuario"
+                                    value="{{ Auth::user()->name }}" class="form-control" hidden>
+                                <input type="date" id="fecha" name="fecha" class="form-control"
+                                    value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" hidden>
+                                <input type="time" id="hora" name="hora" class="form-control" value=""
+                                    hidden>
+                            </div>
+                        </div>
+                        <!--INPUTS QUE SE VEN-->
+                        <div class="row">
+                            <div class="col-md-10 mb-3">
+                                <label for="campo_texto" class="form-label">Mensaje</label>
+                                <input type="text" id="mensaje" name="mensaje" value="{{ old('campo_texto') }}"
+                                    class="form-control" required>
+                            </div>
 
-                    <div class="row">
-                        <!-- Columna para el campo de texto -->
-                        <div class="col-md-6 mb-3">
-                            <input type="text" id="nombre_usuario" name="nombre_usuario" value="{{ Auth::user()->name }}"
-                                class="form-control" hidden>
+                            <!-- Columna para el botón -->
+                            <div class="col-md-2 d-flex align-items-end mb-3">
+                                <button type="submit" class="btn btn-primary w-100">Enviar <i
+                                        class="fas fa-solid fa-circle-chevron-right"></i> </button>
+                            </div>
                         </div>
-                        <div class="col-md-11 mb-3">
-                            <label for="campo_texto" class="form-label">Mensaje</label>
-                            <input type="text" id="campo_texto" name="campo_texto" value="{{ old('campo_texto') }}"
-                                class="form-control" required>
-                        </div>
-
-                        <!-- Columna para el botón -->
-                        <div class="col-md-1 d-flex align-items-end mb-3">
-                            <button type="submit" class="btn btn-primary w-100">Enviar <i class="fas fa-solid fa-right-long"></i> </button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
+            @php
+                use Illuminate\Support\Facades\DB;
+
+                // Obtener el nombre del usuario autenticado
+                $usuarioNombre = Auth::user()->name;
+
+                // Consultar la tabla 'personal' para obtener el rol del usuario
+                $rolUsuario = DB::table('personal')->where('nombre', $usuarioNombre)->value('rol_id');
+            @endphp
+            @if (Auth::check() && $rolUsuario === 1)
+                <div>
+                    <!--VACIAR EL CHAT ENTERO CON CONFIRMACION POR ALERT-->
+                    <form action="{{ route('chat.delete') }}" method="POST">
+                        @csrf
+                        <!--texto-->
+                        <h5>Vaciar Chat</h5>
+                        <h5 class="btn btn-danger fw-bold">¡IMPORTANTE!</h5>
+                        <p>Vaciar el chat es un proceso que no se puede deshacer, se eliminarán todos los mensajes.</p>
+                        <button type="submit" class="btn btn-danger"
+                            onclick="return confirm('¿Estás seguro de que quieres vaciar el chat? Esta acción no se puede deshacer.');"><i
+                                class="fas fa-solid fa-trash-can"></i> Vaciar chat</button>
+                    </form>
+                </div>
+            @endif
         </div>
     </main>
-
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const chatContainer = document.getElementById("chatContainer");
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        });
+    </script>
 @endsection
