@@ -37,6 +37,14 @@
             height: 70px;
             /* Ajusta este valor según tus necesidades */
         }
+
+        .atencion {
+            color: #842029 !important;
+            /* Color del texto */
+            background-color: #f8d7da !important;
+            /* Color de fondo */
+            border-color: #f5c2c7;
+        }
     </style>
     <main>
         <div class="container-fluid px-4">
@@ -66,7 +74,7 @@
                                         </div>
                                     </div>
                                 @endforeach
-                                
+
                             </div>
                         </div>
                         <!-- ESTRUCTURA DE DIAS SUPERIOR -->
@@ -86,47 +94,58 @@
                                     <!-- RELLENAR DE LA TABLA TURNOS -->
                                     @foreach ($turnos as $turno)
                                         @if ($dia->id == $turno->dia)
-                                            <div class="card rounded-0 shadow mb-1">
-                                                <div class="card-body text-center p-3 bg-light">
-                                                @empty($turno->personal)
-                                                    <h5 class="card-title">-</h5>
-                                                @else
-                                                    <h5 class="card-title">{{ $turno->personal }}</h5>
-                                                @endempty
+                                            @if (!empty($turno->personal) && $turno->personal !== '-')
+                                                <div class="card rounded-0 shadow mb-1">
+                                                    <div class="card-body text-center p-3 bg-light">
+
+                                                        <h5 class="card-title">{{ $turno->personal }}</h5>
+
+                                                    </div>
+                                                </div>
+                                            @else
+                                                <!-- Si está vacío o es un guion, no se muestra nada -->
+                                                <div class="card rounded-0 shadow mb-1 atencion">
+                                                    <div class="card-body text-center p-3 bg-light atencion">
+                                                        <h5 class="card-title atencion">
+                                                            <i class="fas fa-exclamation-triangle"></i> No asignada
+                                                        </h5>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- O eliminar esta línea si no quieres mostrar nada -->
+                                            @endif
+                                        @endif
+                                    @endforeach
+
+                                    <!-- Espacio en blanco si no hay turnos -->
+                                    @if (!$turnos->where('dia', $dia->id)->count() || $turno->personal === '')
+                                        <div class="card rounded-0 shadow mb-1">
+                                            <div class="card-body text-center p-3 border-bottom">
+                                                <div class="alert alert-danger mb-0" role="alert">
+                                                    <h5 class="card-title mb-0">
+                                                        <i class="fas fa-solid fa-circle-exclamation"></i> Sin turnos
+                                                    </h5>
+                                                </div>
                                             </div>
                                         </div>
                                     @endif
-                                @endforeach
 
-                                <!-- Espacio en blanco si no hay turnos -->
-                                @if (!$turnos->where('dia', $dia->id)->count())
-                                    <div class="card rounded-0 shadow mb-1">
-                                        <div class="card-body text-center p-3 border-bottom">
-                                            <div class="alert alert-danger mb-0" role="alert">
-                                                <h5 class="card-title mb-0">
-                                                    <i class="fas fa-exclamation-triangle"></i> Sin turnos
-                                                </h5>
-                                            </div>
+                                    <!-- Botón de Editar -->
+                                    <div class="card m-0 p-0 rounded-0 shadow mb-1">
+                                        <div class="card-body text-center p-3 fondo-warning text-white">
+                                            <a href="{{ route('turnos.editar', $dia->id) }}" class="btn btn-warning">
+                                                <i class="fas fa-pen-to-square"></i> Editar
+                                            </a>
                                         </div>
-                                    </div>
-                                @endif
-
-                                <!-- Botón de Editar -->
-                                <div class="card m-0 p-0 rounded-0 shadow mb-1">
-                                    <div class="card-body text-center p-3 fondo-warning text-white">
-                                        <button class="btn btn-warning">
-                                            <i class="fas fa-pen-to-square"></i> Editar
-                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
+                    <!--HAY QUE QUITAR UN DIV AQUI IRIA PERO NO SE PUEDE PONER-->
                 </div>
-                <!--HAY QUE QUITAR UN DIV AQUI IRIA PERO NO SE PUEDE PONER-->
             </div>
         </div>
-    </div>
-</main>
+    </main>
 
 @endsection

@@ -9,6 +9,7 @@ class Diassemanacultural extends Model
 {
     use HasFactory;
 
+    protected $table = 'diassemanacultural';
     protected $fillable = [
         'dia',
         'fecha',

@@ -110,7 +110,7 @@ class BackController extends Controller
         $turnos = Turnos::all();
 
         //Obtener los dias
-        $dias = DB::table('dias_semana_cultural')->get();
+        $dias = DB::table('Diassemanacultural')->get();
         return view('backend.cuadroturnos', compact('dias', 'turnos'));
     }
 

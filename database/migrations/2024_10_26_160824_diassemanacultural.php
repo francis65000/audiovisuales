@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('dias_semana_cultural', function (Blueprint $table) {
+        Schema::create('diassemanacultural', function (Blueprint $table) {
             $table->id();
             $table->string('dia'); // Campo para almacenar el día (ej. 'Lunes', 'Martes')
             $table->date('fecha'); // Campo para almacenar la fecha específica
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('dias_semana_cultural');
+        Schema::dropIfExists('diassemanacultural');
     }
 };

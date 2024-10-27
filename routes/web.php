@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TareasController;
 use App\Http\Controllers\MedioController;
 use App\Http\Controllers\UsuariosController;
+use App\Http\Controllers\TurnoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -69,7 +70,8 @@ Route::delete('/panel/medios-drive/{id}', [MedioController::class, 'destroy'])->
 
 /*CUADRANTE TURNOS SEMANA CULTURAL============================================================*/
 Route::get('/panel/cuadrante-turnos', [BackController::class, 'verCuadroTurnos'])->name('cuadranteTurnos.show');
-
+Route::get('/panel/turnos/{dia}/editar', [TurnoController::class, 'editar'])->name('turnos.editar');
+Route::post('/panel/turnos/{dia}/actualizar', [TurnoController::class, 'actualizar'])->name('turnos.actualizar');
 
 /*CHAT============================================================*/
 Route::get('/panel/chat', [BackController::class, 'verChat'])->name('chat.show');
