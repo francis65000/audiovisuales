@@ -42,7 +42,7 @@
 
                                 <div class="row mb-3">
                                     <h6>Seleccionar el Aula</h6>
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 col-xl-6">
                                         <label for="planta" class="form-label">Planta</label>
                                         <select class="form-select form-select-sm" id="planta" name="planta"
                                             onchange="mostrarAulas()">
@@ -53,7 +53,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 col-xl-6">
                                         <label for="aula" class="form-label">Aula</label>
                                         <select class="form-select form-select-sm" id="aula" name="aula">
                                             <option value="" selected>Selecciona un aula</option>
@@ -116,13 +116,14 @@
             planta0: [
                 "0.1",
                 "0.2 NORTE",
+                "0.2 SUR",
                 "0.3",
                 "0.5",
                 "0.7",
-                "0.2 SUR",
                 "0.9 PLASTICA",
                 "0.11",
-                "ED. NUEVO"
+                "ED. NUEVO",
+                "JEFATURA"
             ],
             planta1: [
                 "1.2",

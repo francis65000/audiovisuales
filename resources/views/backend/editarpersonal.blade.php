@@ -123,13 +123,14 @@
             planta0: [
                 "0.1",
                 "0.2 NORTE",
+                "0.2 SUR",
                 "0.3",
                 "0.5",
                 "0.7",
-                "0.2 SUR",
                 "0.9 PLASTICA",
                 "0.11",
-                "ED. NUEVO"
+                "ED. NUEVO",
+                "JEFATURA"
             ],
             planta1: [
                 "1.2",

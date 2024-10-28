@@ -59,16 +59,17 @@
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-solid fa-calendar-days"></i>
-                    Cuadrante de turnos semana cultural
+                    <!--SACAR LA FECHA QUE HAY GUARDADA -->
+                    <p class="badge fondo fs-5 m-0">{{ \Carbon\Carbon::parse($dias[0]->fecha)->translatedFormat('Y') }}</p>
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-1 m-0 p-0">
+                        <div class="col-md-2 m-0 p-0">
                             <div class="d-flex flex-column">
                                 <!-- Icono de reloj -->
                                 <div class="card m-0 p-0 rounded-0 shadow mb-1">
                                     <div class="card-body text-center p-3 fondo text-white">
-                                        <i class="fas fa-clock fs-2"></i>
+                                        <i class="fas fa-clock fs-4"></i>
                                     </div>
                                 </div>
                                 @foreach (range(1, 6) as $hora)
@@ -97,10 +98,10 @@
                                     <!-- Tarjeta del Día -->
                                     <div class="card m-0 p-0 rounded-0 shadow mb-1">
                                         <div class="card-body text-center p-3 fondo text-white">
-                                            <h5 class="card-title">
+                                            <h6 class="card-title">
                                                 {{ $dia->dia }}
-                                                {{ \Carbon\Carbon::parse($dia->fecha)->translatedFormat('d M Y') }}
-                                            </h5>
+                                                {{ \Carbon\Carbon::parse($dia->fecha)->translatedFormat('d M') }}
+                                            </h6>
                                         </div>
                                     </div>
 

@@ -53,31 +53,34 @@
                                                     <div class="card-body">
                                                         <!-- Información del empleado -->
                                                         <div class="row">
-                                                            <div class="col-3 d-flex align-items-center">
-                                                                <h5 class="card-title mb-0">
-                                                                    {{ $loop->iteration }} {{ $employee->nombre }}
-                                                                </h5>
+                                                            <div class="col-10">
+                                                                <div class="col-12 d-flex align-items-center">
+                                                                    <h4 class="card-title mb-0">
+                                                                        <i class="fas fa-solid fa-circle-user"></i> {{ $employee->nombre }}
+                                                                    </h4>
+                                                                </div>
+                                                                <div class="col-12 d-flex align-items-center mt-2">
+                                                                    <div class="col-2 d-flex align-items-center">
+                                                                        <p class="card-text mb-0">
+                                                                            <strong>Rol:</strong>
+                                                                            {{ $rol ? ucfirst($rol->rol) : 'Sin rol asignado' }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="col-4 d-flex align-items-center">
+                                                                        <p class="card-text mb-0">
+                                                                            <strong>Aula Ref:</strong>
+                                                                            {{ $employee->aula ? $employee->aula : 'No asignada' }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="col-6 d-flex align-items-center">
+                                                                        <p class="card-text mb-0">
+                                                                            <strong>Email:</strong>
+                                                                            {{ $user->email }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div> 
                                                             </div>
-                                                            <div class="col-2 d-flex align-items-center">
-                                                                <p class="card-text mb-0">
-                                                                    <strong>Rol:</strong>
-                                                                    {{ $rol ? ucfirst($rol->rol) : 'Sin rol asignado' }}
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-2 d-flex align-items-center">
-                                                                <p class="card-text mb-0">
-                                                                    <strong>Aula Ref:</strong>
-                                                                    {{ $employee->aula ? $employee->aula : 'No asignada' }}
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-3 d-flex align-items-center">
-                                                                <p class="card-text mb-0">
-                                                                    <strong>Email:</strong>
-                                                                    {{ $user->email }}
-                                                                </p>
-                                                            </div>
-                                                            <div
-                                                                class="col-2 d-flex justify-content-end align-items-center">
+                                                            <div class="col-2 d-flex justify-content-end align-items-center">
                                                                 <!-- Botones para pasar la id  del empleado a la ruta de editar -->
                                                                 <a href="{{url('/panel/personal/editar/'.$employee->id)}}" class="btn btn-warning me-2">
                                                                     <i class="fas fa-solid fa-user-edit"></i> Modificar

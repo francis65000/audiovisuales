@@ -40,26 +40,26 @@
 
                             @endphp
 
-                            <div class="col-12 mb-4"> <!-- Mantener en 2 columnas -->
+                            <div class="col-6 mb-4"> <!-- Mantener en 2 columnas -->
                                 <div class="card {{ $rol->rol ?? 'default-role-class' }}">
                                     <!-- Clase por defecto si no hay rol -->
                                     <div class="card-body">
                                         <!-- Información del empleado -->
-                                        <h3 class="card-title"><i class="fas fa-solid fa-circle-user"></i> {{ $loop->iteration }} {{ $employee->nombre }}</h3>
+                                        <h4 class="card-title"><i class="fas fa-solid fa-circle-user"></i> {{ $employee->nombre }}</h4>
 
                                         <div class="row">
-                                            <div class="col-3">
+                                            <div class="col-12">
                                                 <p class="card-text">
                                                     <strong>Rol:</strong>
                                                     {{ $rol ? ucfirst($rol->rol) : 'Sin rol asignado' }}
                                                 </p>
                                             </div>
-                                            <div class="col-3">
+                                            <div class="col-12">
                                                 <p class="card-text">
                                                     <strong>Aula Ref:</strong> {{ $employee->aula ? $employee->aula : 'No asignada' }}
                                                 </p>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-12">
                                                 <p class="card-text">
                                                     @foreach ($users as $user)
                                                         <!--comprobar que el campo nombre de una tabla y otra coincide-->
