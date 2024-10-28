@@ -6,12 +6,13 @@
 
     <main>
         <div class="container-fluid px-4">
-            <h1 class="mt-4">Editar Usuario:  {{ $personal->nombre }}</h1>
+            <h1 class="mt-4">Editar Usuario: {{ $personal->nombre }}</h1>
 
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item active">Departamento de Audiovisuales</li>
             </ol>
-            <form action="{{ route('personal.update', ['id' => $personal->id]) }}" method="POST" onsubmit="return validarFormulario()">
+            <form action="{{ route('personal.update', ['id' => $personal->id]) }}" method="POST"
+                onsubmit="return validarFormulario()">
                 @csrf
                 <div class="row">
 
@@ -28,27 +29,36 @@
                                     <div class="col-md-9">
                                         <label for="nombre" class="form-label">Nombre y apellidos del usuario</label>
                                         <input type="text" class="form-control form-control-sm" id="nombre"
-                                            name="nombre" value="{{$personal->nombre}}" required>
+                                            name="nombre" value="{{ $personal->nombre }}" required>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="rol_id" class="form-label">Rol</label>
                                         <select class="form-select form-select-sm" id="rol_id" name="rol_id" required>
-                                            <option value="" {{ old('rol_id', $personal->rol_id) == '' ? 'selected' : '' }}>Selecciona un rol</option>
-                                            <option value="1" {{ old('rol_id', $personal->rol_id) == 1 ? 'selected' : '' }}>Jefaso</option>
-                                            <option value="2" {{ old('rol_id', $personal->rol_id) == 2 ? 'selected' : '' }}>Colaborador</option>
-                                            <option value="3" {{ old('rol_id', $personal->rol_id) == 3 ? 'selected' : '' }}>Lector</option>
-                                        </select>                                        
+                                            <option value=""
+                                                {{ old('rol_id', $personal->rol_id) == '' ? 'selected' : '' }}>Selecciona un
+                                                rol</option>
+                                            <option value="1"
+                                                {{ old('rol_id', $personal->rol_id) == 1 ? 'selected' : '' }}>Jefaso
+                                            </option>
+                                            <option value="2"
+                                                {{ old('rol_id', $personal->rol_id) == 2 ? 'selected' : '' }}>Colaborador
+                                            </option>
+                                            <option value="3"
+                                                {{ old('rol_id', $personal->rol_id) == 3 ? 'selected' : '' }}>Lector
+                                            </option>
+                                        </select>
                                     </div>
                                 </div>
 
-                                
+
                                 <div class="row mb-3">
                                     <h6>Seleccionar el Aula</h6>
-                                    <div class="col-md-8">
-                                        <div class="alert alert-danger" role="alert"> <i class="fa-solid fa-triangle-exclamation"></i> En caso de no querer modificarla, no seleccione nada</div>
+                                    <div class="col-md-8 col-xl-9">
+                                        <div class="alert alert-danger" role="alert"> <i
+                                                class="fa-solid fa-triangle-exclamation"></i> Debe de volver a seleccionar el aula</div>
                                     </div>
-                                    
-                                    <div class="col-md-5">
+
+                                    <div class="col-md-5 col-xl-6">
                                         <label for="planta" class="form-label">Planta</label>
                                         <select class="form-select form-select-sm" id="planta" name="planta"
                                             onchange="mostrarAulas()">
@@ -59,7 +69,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-md-5">
+                                    <div class="col-md-5 col-xl-6">
                                         <label for="aula" class="form-label">Aula</label>
                                         <select class="form-select form-select-sm" id="aula" name="aula">
                                             <option value="" selected>Selecciona un aula</option>
@@ -83,35 +93,45 @@
                                     <div class="col-md-6">
                                         <label for="name" class="form-label">Nombre y apellidos</label>
                                         <input type="text" class="form-control form-control-sm" id="name"
-                                            name="name" value="{{$user->name}}" required>
+                                            name="name" value="{{ $user->name }}" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="email" class="form-label">Email</label>
                                         <input type="email" class="form-control form-control-sm" id="email"
-                                            name="email" value="{{$user->email}}" required>
+                                            name="email" value="{{ $user->email }}" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <h6>La contraseña debe de tener mayúsculas, minúsculas, números y caracteres especiales</h6>
-                                    <div class="col-md-10">
-                                        <div class="alert alert-danger" role="alert"> <i class="fa-solid fa-triangle-exclamation"></i> ¡IMPORTANTE! Si no desea cambiar la contraseña, deje el campo vacío</div>
+                                    <h6>La contraseña debe de tener mayúsculas, minúsculas, números y caracteres especiales
+                                    </h6>
+                                    <div class="col-md-10 col-xl-12">
+                                        <div class="alert alert-danger" role="alert"> <i
+                                                class="fa-solid fa-triangle-exclamation"></i> ¡IMPORTANTE! Si no desea
+                                            cambiar la contraseña, deje el campo vacío</div>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="password" class="form-label">Nueva Contraseña</label>
                                         <input type="password" class="form-control form-control-sm" id="password"
-                                            name="password" >
+                                            name="password">
+                                        <div class="mt-2">
+                                            <input type="checkbox" class="form-check-input" id="showPassword"
+                                                onchange="togglePasswordVisibility()">
+                                            <label class="form-check-label" for="showPassword">Mostrar Contraseña</label>
+                                        </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="password_confirmation" class="form-label">Repite la nueva contraseña</label>
+                                        <label for="password_confirmation" class="form-label">Repite la nueva
+                                            contraseña</label>
                                         <input type="password" class="form-control form-control-sm"
-                                            id="password_confirmation" name="password_confirmation" >
+                                            id="password_confirmation" name="password_confirmation">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary"><i class="fas fa-solid fa-floppy-disk"></i> Actualizar Usuario</button>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-solid fa-floppy-disk"></i> Actualizar
+                    Usuario</button>
                 <a href="{{ url('/panel/personal/gestion-usuarios') }}" class="btn btn-danger">
                     <i class="fas fa-solid fa-xmark"></i> Cancelar
                 </a>
@@ -201,6 +221,16 @@
             }
 
             return true; // Permitir el envío del formulario
+        }
+
+        //mostrar contraseña
+
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById("password");
+            const showPasswordCheckbox = document.getElementById("showPassword");
+
+            // Cambia el tipo de input entre "password" y "text"
+            passwordInput.type = showPasswordCheckbox.checked ? "text" : "password";
         }
     </script>
 

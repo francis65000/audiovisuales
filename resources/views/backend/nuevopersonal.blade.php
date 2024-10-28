@@ -93,6 +93,11 @@
                                         <label for="password" class="form-label">Contraseña</label>
                                         <input type="password" class="form-control form-control-sm" id="password"
                                             name="password" required>
+                                        <div class="mt-2">
+                                            <input type="checkbox" class="form-check-input" id="showPassword"
+                                                onchange="togglePasswordVisibility()">
+                                            <label class="form-check-label" for="showPassword">Mostrar Contraseña</label>
+                                        </div>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="password_confirmation" class="form-label">Repite la contraseña</label>
@@ -194,6 +199,16 @@
             }
 
             return true; // Permitir el envío del formulario
+        }
+
+        //mostrar contraseña
+
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById("password");
+            const showPasswordCheckbox = document.getElementById("showPassword");
+
+            // Cambia el tipo de input entre "password" y "text"
+            passwordInput.type = showPasswordCheckbox.checked ? "text" : "password";
         }
     </script>
 
