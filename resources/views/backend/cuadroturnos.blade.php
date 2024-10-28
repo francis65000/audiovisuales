@@ -63,6 +63,15 @@
                     <p class="badge fondo fs-5 m-0">{{ \Carbon\Carbon::parse($dias[0]->fecha)->translatedFormat('Y') }}</p>
                 </div>
                 <div class="card-body">
+                    @php
+                        use Illuminate\Support\Facades\DB;
+
+                        // Obtener el nombre del usuario autenticado
+                        $usuarioNombre = Auth::user()->name;
+
+                        // Consultar la tabla 'personal' para obtener el rol del usuario
+                        $rolUsuario = DB::table('personal')->where('nombre', $usuarioNombre)->value('rol_id');
+                    @endphp
                     <div class="row">
                         <div class="col-md-2 m-0 p-0">
                             <div class="d-flex flex-column">
@@ -79,16 +88,20 @@
                                         </div>
                                     </div>
                                 @endforeach
+                                @if (Auth::check() && $rolUsuario === 1)
                                 <div class="card m-0 p-0 rounded-0 shadow mb-1">
                                     <div class="card-body text-center p-3 fondo-danger text-white">
-                                        <form action="{{ route('vaciar.personal') }}" method="POST" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas vaciar el cuadrante entero? Esta acción no se puede deshacer.');">
+                                        <form action="{{ route('vaciar.personal') }}" method="POST" style="display:inline;"
+                                            onsubmit="return confirm('¿Estás seguro de que deseas vaciar el cuadrante entero? Esta acción no se puede deshacer.');">
                                             @csrf
-                                            <button type="submit" class="btn btn-danger" onsubmit="return confirm('¿Estás seguro de que deseas vaciar el cuadrante entero? Esta acción no se puede deshacer.');">
+                                            <button type="submit" class="btn btn-danger"
+                                                onsubmit="return confirm('¿Estás seguro de que deseas vaciar el cuadrante entero? Esta acción no se puede deshacer.');">
                                                 <i class="fas fa-solid fa-trash-can"></i> Eliminar
                                             </button>
                                         </form>
                                     </div>
                                 </div>
+                                @endif
                             </div>
                         </div>
                         <!-- ESTRUCTURA DE DIAS SUPERIOR -->
@@ -124,7 +137,7 @@
                                                             <i class="fas fa-exclamation-triangle"></i> No asignada
                                                         </h5>
                                                     </div>
-                                                </div>                           
+                                                </div>
                                             @endif
                                         @endif
                                     @endforeach

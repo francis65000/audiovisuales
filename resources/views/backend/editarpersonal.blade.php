@@ -40,10 +40,10 @@
                                             <option value="1"
                                                 {{ old('rol_id', $personal->rol_id) == 1 ? 'selected' : '' }}>Jefaso
                                             </option>
-                                            <option value="2"
+                                            <option value="3"
                                                 {{ old('rol_id', $personal->rol_id) == 2 ? 'selected' : '' }}>Colaborador
                                             </option>
-                                            <option value="3"
+                                            <option value="5"
                                                 {{ old('rol_id', $personal->rol_id) == 3 ? 'selected' : '' }}>Lector
                                             </option>
                                         </select>

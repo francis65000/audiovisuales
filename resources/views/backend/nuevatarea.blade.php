@@ -34,30 +34,43 @@
             <!--LEYENDA DE COLORES-->
             <h3 class="mt-4 text-right">Leyenda de Colores</h3>
             <div class="row text-center">
-
-                <div class="col-xl-2 col-md-4">
-                    <div class="card bg-info text-white mb-4">
-                        <div class="card-body text-dark fw-bold">PLANIFICACIÓN</div>
-                    </div>
-                </div>
-                <div class="col-xl-2 col-md-4">
-                    <div class="card bg-yellow text-white mb-4">
-                        <div class="card-body text-dark fw-bold">OTROS</div>
-                    </div>
-                </div>
-                <div class="col-xl-2 col-md-4">
-                    <div class="card bg-orange text-white mb-4">
-                        <div class="card-body text-dark fw-bold">GRADUACIONES</div>
-                    </div>
-                </div>
-                <div class="col-xl-2 col-md-4">
-                    <div class="card bg-green text-white mb-4">
-                        <div class="card-body text-dark fw-bold">EVENTOS</div>
-                    </div>
-                </div>
-                <div class="col-xl-2 col-md-4">
-                    <div class="card bg-pink text-white mb-4">
-                        <div class="card-body text-dark fw-bold">SEMANA CULTURAL</div>
+                <div class="col-12">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-2 col-md-4 col-sm-6 mb-4">
+                            <div class="card bg-info h-100">
+                                <div class="card-body d-flex align-items-center justify-content-center fw-bold">
+                                    PLANIFICACIÓN
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-md-4 col-sm-6 mb-4">
+                            <div class="card bg-yellow h-100">
+                                <div class="card-body d-flex align-items-center justify-content-center fw-bold">
+                                    OTROS
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-md-4 col-sm-6 mb-4">
+                            <div class="card bg-orange h-100">
+                                <div class="card-body d-flex align-items-center justify-content-center fw-bold">
+                                    GRADUACIONES
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-md-4 col-sm-6 mb-4">
+                            <div class="card bg-green h-100">
+                                <div class="card-body d-flex align-items-center justify-content-center fw-bold">
+                                    EVENTOS
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-md-4 col-sm-6 mb-4">
+                            <div class="card bg-pink h-100">
+                                <div class="card-body d-flex align-items-center justify-content-center fw-bold">
+                                    SEMANA CULTURAL
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
