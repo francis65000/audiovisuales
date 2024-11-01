@@ -58,9 +58,9 @@
             </ol>
             <div class="card mb-4">
                 <div class="card-header">
-                    <i class="fas fa-solid fa-calendar-days"></i>
+                    
                     <!--SACAR LA FECHA QUE HAY GUARDADA -->
-                    <p class="badge fondo fs-5 m-0">{{ \Carbon\Carbon::parse($dias[0]->fecha)->translatedFormat('Y') }}</p>
+                    <p class="badge fondo fs-5 m-0"><i class="fas fa-solid fa-calendar-days"></i> {{ \Carbon\Carbon::parse($dias[0]->fecha)->translatedFormat('Y') }}</p>
                 </div>
                 <div class="card-body">
                     @php
